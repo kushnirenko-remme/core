@@ -1,10 +1,6 @@
 node ('ubuntu18') {
     cleanWs()
     def PWD = pwd();
-    stage("git"){
-        git branch: repo_branch, url: repo_url
-        sh 'git submodule update --init --recursive'
-    }
     stage("build"){
         sh '''
         export HOME="${PWD}"
