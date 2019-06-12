@@ -1,3 +1,3 @@
-            steps {
+            stage {
                 sh 'ls' 
             }
