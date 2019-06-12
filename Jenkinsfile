@@ -3,6 +3,7 @@ node ('ubuntu18') {
     def PWD = pwd();
     stage("git"){
         checkout scm
+        sh 'git submodule update --init --recursive'
     }
     stage("build"){
         sh '''
