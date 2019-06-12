@@ -1,5 +1,4 @@
-pipeline {
-    agent none 
+pipeline { 
     stages {
         stage('ls') { 
             steps {
