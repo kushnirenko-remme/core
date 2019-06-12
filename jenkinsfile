@@ -1,3 +1,10 @@
-steps {
-        sh 'ls -la'
+pipeline {
+    agent none 
+    stages {
+        stage('ls') { 
+            steps {
+                sh 'ls' 
+            }
+        }
+    }
 }
