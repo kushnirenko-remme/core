@@ -1,6 +1,9 @@
 node ('ubuntu18') {
     cleanWs()
     def PWD = pwd();
+    stage("git"){
+        checkout scm
+    }
     stage("build"){
         sh '''
         export HOME="${PWD}"
