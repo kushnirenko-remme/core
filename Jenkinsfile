@@ -1,6 +1,5 @@
 node ('ubuntu18') {
     cleanWs()
-    def PWD = pwd();
     stage("git"){
         checkout scm
         sh 'git submodule update --init --recursive'
