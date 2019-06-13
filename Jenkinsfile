@@ -1,4 +1,5 @@
 node ('ubuntu18') {
+    properties([disableConcurrentBuilds()])
     cleanWs()
     stage("git"){
         checkout scm
