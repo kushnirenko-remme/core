@@ -1522,10 +1522,14 @@ void mongo_db_plugin_impl::init() {
 
    ilog("starting db plugin thread");
 
+<<<<<<< HEAD
    consume_thread = std::thread( [this] {
       fc::set_os_thread_name( "mongodb" );
       consume_blocks();
    } );
+=======
+   consume_thread = std::thread([this] { consume_blocks(); });
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
 
    startup = false;
 }

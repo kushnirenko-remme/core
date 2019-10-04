@@ -9,7 +9,10 @@ endif()
 
 add_subdirectory( asserter )
 add_subdirectory( deferred_test )
+<<<<<<< HEAD
 add_subdirectory( get_sender_test )
+=======
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
 add_subdirectory( integration_test )
 add_subdirectory( noop )
 add_subdirectory( payloadless )

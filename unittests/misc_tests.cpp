@@ -835,15 +835,25 @@ BOOST_AUTO_TEST_CASE(transaction_metadata_test) { try {
       BOOST_CHECK( !mtrx->signing_keys_future.valid() );
       BOOST_CHECK( !mtrx2->signing_keys_future.valid() );
 
+<<<<<<< HEAD
       transaction_metadata::start_recover_keys( mtrx, thread_pool.get_executor(), test.control->get_chain_id(), fc::microseconds::maximum() );
       transaction_metadata::start_recover_keys( mtrx2, thread_pool.get_executor(), test.control->get_chain_id(), fc::microseconds::maximum() );
+=======
+      transaction_metadata::start_recover_keys( mtrx, thread_pool, test.control->get_chain_id(), fc::microseconds::maximum() );
+      transaction_metadata::start_recover_keys( mtrx2, thread_pool, test.control->get_chain_id(), fc::microseconds::maximum() );
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
 
       BOOST_CHECK( mtrx->signing_keys_future.valid() );
       BOOST_CHECK( mtrx2->signing_keys_future.valid() );
 
       // no-op
+<<<<<<< HEAD
       transaction_metadata::start_recover_keys( mtrx, thread_pool.get_executor(), test.control->get_chain_id(), fc::microseconds::maximum() );
       transaction_metadata::start_recover_keys( mtrx2, thread_pool.get_executor(), test.control->get_chain_id(), fc::microseconds::maximum() );
+=======
+      transaction_metadata::start_recover_keys( mtrx, thread_pool, test.control->get_chain_id(), fc::microseconds::maximum() );
+      transaction_metadata::start_recover_keys( mtrx2, thread_pool, test.control->get_chain_id(), fc::microseconds::maximum() );
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
 
       auto keys = mtrx->recover_keys( test.control->get_chain_id() );
       BOOST_CHECK_EQUAL(1u, keys.second.size());
@@ -869,8 +879,11 @@ BOOST_AUTO_TEST_CASE(transaction_metadata_test) { try {
       auto keys5 = mtrx5->recover_keys( test.control->get_chain_id() );
       BOOST_CHECK_EQUAL(1u, keys5.second.size());
       BOOST_CHECK_EQUAL(public_key, *keys5.second.begin());
+<<<<<<< HEAD
 
       thread_pool.stop();
+=======
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
 
 } FC_LOG_AND_RETHROW() }
 

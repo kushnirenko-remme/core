@@ -270,7 +270,7 @@ class Utils:
             # If no -a, AttributeError: 'NoneType' object has no attribute 'group'
             pgrepOpts="-fl"
 
-        return "pgrep %s %s" % (pgrepOpts, serverName)
+        return "pgrep %s %s" % (pgrepOpts, serverName)\
 
     @staticmethod
     def getBlockLog(blockLogLocation, silentErrors=False, exitOnError=False):

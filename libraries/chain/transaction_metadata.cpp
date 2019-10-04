@@ -5,7 +5,11 @@
 namespace eosio { namespace chain {
 
 recovery_keys_type transaction_metadata::recover_keys( const chain_id_type& chain_id ) {
+<<<<<<< HEAD
    // Unlikely for more than one chain_id to be used in one remnode instance
+=======
+   // Unlikely for more than one chain_id to be used in one nodeos instance
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
    if( signing_keys_future.valid() ) {
       const std::tuple<chain_id_type, fc::microseconds, flat_set<public_key_type>>& sig_keys = signing_keys_future.get();
       if( std::get<0>( sig_keys ) == chain_id ) {
@@ -26,7 +30,11 @@ recovery_keys_type transaction_metadata::recover_keys( const chain_id_type& chai
 }
 
 signing_keys_future_type transaction_metadata::start_recover_keys( const transaction_metadata_ptr& mtrx,
+<<<<<<< HEAD
                                                                    boost::asio::io_context& thread_pool,
+=======
+                                                                   boost::asio::thread_pool& thread_pool,
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
                                                                    const chain_id_type& chain_id,
                                                                    fc::microseconds time_limit )
 {

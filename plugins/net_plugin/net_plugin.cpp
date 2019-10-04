@@ -484,7 +484,11 @@ namespace eosio {
       peer_block_state_index  blk_state;
       transaction_state_index trx_state;
       optional<sync_state>    peer_requested;  // this peer is requesting info from us
+<<<<<<< HEAD
       boost::asio::io_context&                  server_ioc;
+=======
+      std::shared_ptr<boost::asio::io_context>  server_ioc; // keep ioc alive
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
       boost::asio::io_context::strand           strand;
       socket_ptr                                socket;
 
@@ -566,9 +570,6 @@ namespace eosio {
       /** @} */
 
       const string peer_name();
-
-      void txn_send_pending(const vector<transaction_id_type>& ids);
-      void txn_send(const vector<transaction_id_type>& txn_lis);
 
       void blk_send_branch();
       void blk_send(const block_id_type& blkid);
@@ -718,9 +719,15 @@ namespace eosio {
       : blk_state(),
         trx_state(),
         peer_requested(),
+<<<<<<< HEAD
         server_ioc( my_impl->thread_pool->get_executor() ),
         strand( app().get_io_service() ),
         socket( std::make_shared<tcp::socket>( my_impl->thread_pool->get_executor() ) ),
+=======
+        server_ioc( my_impl->server_ioc ),
+        strand( app().get_io_service() ),
+        socket( std::make_shared<tcp::socket>( std::ref( *my_impl->server_ioc ))),
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
         node_id(),
         last_handshake_recv(),
         last_handshake_sent(),
@@ -744,7 +751,11 @@ namespace eosio {
       : blk_state(),
         trx_state(),
         peer_requested(),
+<<<<<<< HEAD
         server_ioc( my_impl->thread_pool->get_executor() ),
+=======
+        server_ioc( my_impl->server_ioc ),
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
         strand( app().get_io_service() ),
         socket( s ),
         node_id(),
@@ -815,6 +826,7 @@ namespace eosio {
       fc_dlog(logger, "canceling wait on ${p}", ("p",peer_name()));
       cancel_wait();
       if( read_delay_timer ) read_delay_timer->cancel();
+<<<<<<< HEAD
    }
 
    void connection::txn_send_pending(const vector<transaction_id_type>& ids) {
@@ -835,6 +847,8 @@ namespace eosio {
             queue_write( tx->serialized_txn, true, priority::low, []( boost::system::error_code ec, std::size_t ) {} );
          }
       }
+=======
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
    }
 
    void connection::blk_send_branch() {
@@ -2415,17 +2429,6 @@ namespace eosio {
          break;
       }
       case catch_up : {
-         if( msg.known_trx.pending > 0) {
-            // plan to get all except what we already know about.
-            req.req_trx.mode = catch_up;
-            send_req = true;
-            size_t known_sum = local_txns.size();
-            if( known_sum ) {
-               for( const auto& t : local_txns.get<by_id>() ) {
-                  req.req_trx.ids.push_back( t.id );
-               }
-            }
-         }
          break;
       }
       case normal: {
@@ -2484,14 +2487,17 @@ namespace eosio {
 
       switch (msg.req_trx.mode) {
       case catch_up :
-         c->txn_send_pending(msg.req_trx.ids);
-         break;
-      case normal :
-         c->txn_send(msg.req_trx.ids);
          break;
       case none :
          if(msg.req_blocks.mode == none)
             c->stop_send();
+         // no break
+      case normal :
+         if( !msg.req_trx.ids.empty() ) {
+            elog( "Invalid request_message, req_trx.ids.size ${s}", ("s", msg.req_trx.ids.size()) );
+            close(c);
+            return;
+         }
          break;
       default:;
       }

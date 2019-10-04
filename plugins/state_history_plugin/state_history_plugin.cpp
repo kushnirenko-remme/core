@@ -408,7 +408,11 @@ struct state_history_plugin_impl : std::enable_shared_from_this<state_history_pl
              auth.permission == eosio::chain::config::active_name;
    }
 
+<<<<<<< HEAD
    void on_applied_transaction(const transaction_trace_ptr& p, const signed_transaction& t) {
+=======
+   void on_applied_transaction(const transaction_trace_ptr& p) {
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
       if (p->receipt && trace_log) {
          if (is_onblock(p))
             onblock_trace.emplace(p, t);

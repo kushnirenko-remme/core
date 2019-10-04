@@ -478,7 +478,10 @@ namespace eosio { namespace testing {
       auto mtrx = std::make_shared<transaction_metadata>(trx, c);
       transaction_metadata::start_recover_keys( mtrx, control->get_thread_pool(), control->get_chain_id(), time_limit );
       auto r = control->push_transaction( mtrx, deadline, billed_cpu_time_us );
+<<<<<<< HEAD
       if (no_throw) return r;
+=======
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
       if( r->except_ptr ) std::rethrow_exception( r->except_ptr );
       if( r->except)  throw *r->except;
       return r;

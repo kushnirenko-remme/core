@@ -100,9 +100,13 @@ IF( WIN32 )
   set(Boost_USE_MULTITHREADED ON)
   set(BOOST_ALL_DYN_LINK OFF) # force dynamic linking for all libraries
 ENDIF(WIN32)
+<<<<<<< HEAD
 ### Remove after Boost 1.70 CMake fixes are in place
 set( Boost_NO_BOOST_CMAKE ON CACHE STRING "ON or OFF" )
 find_package(Boost 1.67 REQUIRED COMPONENTS
+=======
+FIND_PACKAGE(Boost 1.67 REQUIRED COMPONENTS
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
     date_time
     filesystem
     system
@@ -111,10 +115,19 @@ find_package(Boost 1.67 REQUIRED COMPONENTS
     unit_test_framework
     iostreams)
 
+<<<<<<< HEAD
 add_definitions(-DBOOST_ASIO_DISABLE_STD_EXPERIMENTAL_STRING_VIEW)
 
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+=======
+# Some new stdlibc++s will #error on <experimental/string_view>; a problem for boost pre-1.69
+if( APPLE AND UNIX )
+   add_definitions(-DBOOST_ASIO_DISABLE_STD_EXPERIMENTAL_STRING_VIEW)
+endif()
+
+set(THREADS_PREFER_PTHREAD_FLAG 1)
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
 find_package(Threads)
 link_libraries(Threads::Threads)
 

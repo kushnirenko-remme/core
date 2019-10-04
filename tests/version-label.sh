@@ -1,5 +1,9 @@
 #!/bin/bash
+<<<<<<< HEAD
 # The purpose of this test is to ensure that the output of the "remnode --version" command matches the version string defined by our CMake files
+=======
+# The purpose of this test is to ensure that the output of the "nodeos --version" command matches the version string defined by our CMake files
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
 # If the environment variable BUILDKITE_TAG is empty or unset, this test will echo success
 echo '##### Nodeos Version Label Test #####'
 if [[ "$BUILDKITE_TAG" == '' || "$BUILDKITE" != 'true' ]]; then
@@ -61,8 +65,13 @@ if [[ "$EXPECTED" == '' ]]; then
     exit 1
 fi
 echo "Expecting \"$EXPECTED\"..."
+<<<<<<< HEAD
 # get remnode version
 ACTUAL=$($EOSIO_ROOT/build/bin/remnode --version) || : # remnode currently returns -1 for --version
+=======
+# get nodeos version
+ACTUAL=$($EOSIO_ROOT/build/bin/nodeos --version) || : # nodeos currently returns -1 for --version
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
 # test
 if [[ "$EXPECTED" == "$ACTUAL" ]]; then
     echo 'Passed with \"$ACTUAL\".'

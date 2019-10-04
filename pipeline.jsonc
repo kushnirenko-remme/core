@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "eos-multiversion-tests":
     {
         "environment":
@@ -32,5 +33,18 @@
             "SKIP_PRE_V180": "true",
             "SKIP_V180": "false"
         }
+=======
+    "eosio-lrt":
+    {
+        "pipeline-branch": "legacy-os"
+    },
+    "eosio-nightly-builds":
+    {
+        "pipeline-branch": "legacy-os"
+    },
+    "eosio-base-images":
+    {
+        "pipeline-branch": "release/1.7.x"
+>>>>>>> ad3b43c22940c8573c9a8fd9ec02afcfd125770e
     }
 }
